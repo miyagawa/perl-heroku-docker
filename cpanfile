@@ -1,2 +1,1 @@
-requires 'Plack';
 requires 'Starlet';

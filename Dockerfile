@@ -22,11 +22,14 @@ RUN chmod +x /app/heroku/perl-build
 RUN /usr/bin/perl /app/heroku/perl-build $PERL_VERSION /app/perl/perl-$PERL_VERSION
 RUN curl -sL https://cpanmin.us/ | /app/perl/perl-$PERL_VERSION/bin/perl - -n --dev Carmel
 
+ENV PERL_CARMEL_REPO=/app/heroku/carmel
+
 ONBUILD COPY cpanfile /app/src/
 
 ONBUILD USER app
 
-ONBUILD RUN carmel install && carmel rollout
+ONBUILD RUN carmel install
+ONBUILD RUN carmel rollout
 
 ONBUILD COPY . /app/src
 
